@@ -54,8 +54,8 @@ from . import utils
 from .metrics import *
 
 
-def score(seg1, seg2, rand=True, voi=True,
-          foreground_restricted=True, log2=True):
+def score(seg1, seg2, rand=True, voi=True, voi_base=2,
+          foreground_restricted=True):
     # Foreground restriction
     if foreground_restricted:
         seg1 = seg1[seg2 != 0]
@@ -70,8 +70,8 @@ def score(seg1, seg2, rand=True, voi=True,
     results = {}
     for name, metric_fn in metrics:
         (f,m,s) = metric_fn(om, name, None)
-        if "Variation of Information" in name and log2:
-            (f,m,s) = tuple(x/math.log(2) for x in (f,m,s))
+        if "Variation of Information" in name:
+            (f,m,s) = tuple(x/math.log(voi_base) for x in (f,m,s))
         results["{} Full".format(name)]  = f
         results["{} Merge".format(name)] = m
         results["{} Split".format(name)] = s
