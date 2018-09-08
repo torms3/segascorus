@@ -59,7 +59,7 @@ def score(seg1, seg2, rand=True, voi=True):
     om = utils.calc_overlap_matrix(seg1, seg2, split_0_segment)
 
     # Calculate each metric.
-    metrics = utils.parse_fns(utils.metric_fns, [False,rand,False,voi])
+    metrics = utils.parse_fns(utils.metric_fns, [rand,False,False,voi])
     results = {}
     for name, metric_fn in metrics:
         (f,m,s) = metric_fn(om, name, None)
