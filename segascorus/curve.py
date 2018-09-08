@@ -10,10 +10,12 @@ and then finds the error for each thresholded segmentation.
 Saves the curve of errors to disk under an HDF5 file specifying each score
 '''
 
-
 import argparse, timeit
 import numpy as np
-import io_utils, utils, data_prep
+
+from . import data_prep
+from . import io_utils
+from . import utils
 
 
 def main( ws_filename, label_filename, output_filename,

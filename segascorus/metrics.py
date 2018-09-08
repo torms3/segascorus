@@ -10,8 +10,12 @@ import timeit
 #Dependencies
 import numpy as np
 import scipy.sparse as sp
-import data_prep, repres, utils, global_vars
-import metrics_u
+
+from . import data_prep
+from . import global_vars
+from . import metrics_u
+from . import repres
+from . import utils
 
 
 DTYPE= global_vars.DTYPE

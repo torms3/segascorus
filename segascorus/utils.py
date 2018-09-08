@@ -8,10 +8,11 @@ within both error.py and curve.py
 Nicholas Turner, Jingpeng Wu June-October 2015
 '''
 
-import timeit
-import data_prep, repres
-from metrics import *
 import numpy as np
+import timeit
+
+from . import data_prep, repres
+from .metrics import *
 
 
 metric_fns = [

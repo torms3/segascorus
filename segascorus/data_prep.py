@@ -5,8 +5,7 @@ Data Preprocessing - data_prep.py
 Nicholas Turner 2016
 '''
 
-
-import data_prep_u as u
+from . import data_prep_u as u
 
 
 def relabel2d(seg1, seg2):
@@ -35,5 +34,3 @@ def foreground_restriction(seg1, seg2):
     seg2_fr = seg2[seg2 != 0]
 
     return seg1_fr, seg2_fr
-
-

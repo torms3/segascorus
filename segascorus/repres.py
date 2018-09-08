@@ -4,8 +4,9 @@ Data Representations - repres.py
 """
 import numpy as np
 import scipy.sparse as sp
-import global_vars
-import repres_u
+
+from . import global_vars
+from . import repres_u
 
 DTYPE = global_vars.DTYPE
 
