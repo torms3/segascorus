@@ -46,11 +46,29 @@ Main Outputs:
 Nicholas Turner, Jingpeng Wu 2015-2016
 '''
 
-
 import argparse
 import io_utils
 import utils
 from metrics import *
+
+
+def eval(seg1, seg2, rand=True, voi=True):
+    # Overlap matrix
+    split_0_segment = True
+    om = utils.calc_overlap_matrix(seg1, seg2, split_0_segment)
+
+    # Calculate each metric.
+	metrics = utils.parse_fns(utils.metric_fns, [False,rand,False,voi])
+	results = {}
+	for name, metric_fn in metrics:
+        (f,m,s) = metric_fn(om, name, None)
+        results["{} Full".format(name)]  = f
+        results["{} Merge".format(name)] = m
+        results["{} Split".format(name)] = s
+
+    # Report results.
+	print("")
+	utils.print_metrics(results)
 
 
 def main(seg1_fname, seg2_fname,
