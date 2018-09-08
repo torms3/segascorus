@@ -47,12 +47,13 @@ Nicholas Turner, Jingpeng Wu 2015-2016
 '''
 
 import argparse
-import io_utils
-import utils
-from metrics import *
+
+from . import io_utils
+from . import utils
+from .metrics import *
 
 
-def eval(seg1, seg2, rand=True, voi=True):
+def score(seg1, seg2, rand=True, voi=True):
     # Overlap matrix
     split_0_segment = True
     om = utils.calc_overlap_matrix(seg1, seg2, split_0_segment)
