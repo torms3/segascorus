@@ -9,7 +9,7 @@ Nicholas Turner, Ignacio Tartavull 2016
 from os import path
 import numpy as np
 
-import global_vars
+from . import global_vars
 
 DTYPE = global_vars.DTYPE
 
