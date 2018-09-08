@@ -47,13 +47,20 @@ Nicholas Turner, Jingpeng Wu 2015-2016
 '''
 
 import argparse
+import math
 
 from . import io_utils
 from . import utils
 from .metrics import *
 
 
-def score(seg1, seg2, rand=True, voi=True):
+def score(seg1, seg2, rand=True, voi=True,
+          foreground_restricted=True, log2=True):
+    # Foreground restriction
+    if foreground_restricted:
+        seg1 = seg1[seg2 != 0]
+        seg2 = seg2[seg2 != 0]
+
     # Overlap matrix
     split_0_segment = True
     om = utils.calc_overlap_matrix(seg1, seg2, split_0_segment)
@@ -63,6 +70,8 @@ def score(seg1, seg2, rand=True, voi=True):
     results = {}
     for name, metric_fn in metrics:
         (f,m,s) = metric_fn(om, name, None)
+        if "Variation of Information" in name and log2:
+            (f,m,s) = tuple(x/math.log(2) for x in (f,m,s))
         results["{} Full".format(name)]  = f
         results["{} Merge".format(name)] = m
         results["{} Split".format(name)] = s
