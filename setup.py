@@ -14,10 +14,14 @@ include_dirs = [
 
 
 extensions = [
-    Extension("segascorus.global_vars", ["global_vars.pyx"]),
-    Extension("segascorus.data_prep_u", ["data_prep_u.pyx"]),
-    Extension("segascorus.metrics_u", ["metrics_u.pyx"]),
-    Extension("segascorus.repres_u", ["repres_u.pyx"],
+    Extension( "segascorus.global_vars",
+              ["segascorus/global_vars.pyx"]),
+    Extension( "segascorus.data_prep_u",
+              ["segascorus/data_prep_u.pyx"]),
+    Extension( "segascorus.metrics_u",
+              ["segascorus/metrics_u.pyx"]),
+    Extension( "segascorus.repres_u",
+              ["segascorus/repres_u.pyx"],
               language="c++",
               extra_compile_args=["-std=c++11"]),
 ]
