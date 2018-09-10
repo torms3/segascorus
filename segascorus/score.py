@@ -54,8 +54,12 @@ from . import utils
 from .metrics import *
 
 
-def score(seg1, seg2, rand=True, voi=True, voi_base=2,
+def score(seg1, seg2, voi=True, rand=True, voi_base=2,
           foreground_restricted=True):
+    results = dict()
+    if not voi and not rand:
+        return results
+
     # Foreground restriction
     if foreground_restricted:
         seg1 = seg1[seg2 != 0]
@@ -67,7 +71,6 @@ def score(seg1, seg2, rand=True, voi=True, voi_base=2,
 
     # Calculate each metric.
     metrics = utils.parse_fns(utils.metric_fns, [rand,False,False,voi])
-    results = {}
     for name, metric_fn in metrics:
         (f,m,s) = metric_fn(om, name, None)
         if "Variation of Information" in name:
@@ -79,6 +82,7 @@ def score(seg1, seg2, rand=True, voi=True, voi_base=2,
     # Report results.
     print("")
     utils.print_metrics(results)
+    return results
 
 
 def main(seg1_fname, seg2_fname,
