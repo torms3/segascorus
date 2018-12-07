@@ -39,5 +39,6 @@ setup(
         ]
     },
     include_package_data=True,
-	ext_modules = cythonize(extensions)
+    ext_modules = cythonize(extensions),
+    include_dirs=include_dirs
 )
